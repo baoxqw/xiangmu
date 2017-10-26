@@ -4,7 +4,108 @@
 		<meta charset="utf-8" />
 		<title></title>
 	</head>
+	<link rel="stylesheet" href="css/index.css" />
+	<link rel="stylesheet" type="text/css" href="css/swiper-3.4.2.min.css"/>
 	<body>
-		
+		<!------------------------------头部--------------------------------------->
+		<div id="head">
+			<!------------------------------头部上------------------------------------->
+			<div id="top">
+				<h1 class="login">
+					<a href="index.html">
+						<img src="img/logo.jpg" />
+					</a>
+				</h1>
+				<form>
+					<input type="text" placeholder='搜索品牌/产品' class="inc1"/>
+					<a><input type="submit" class="inc2" value=""/></a>
+				</form>
+				<div id="rig1">
+					<ul>
+						<li><a href="#">Y CNY v</a></li>
+						<li><a href="#">English v</a></li>
+						<li><a href="search.html">订单查询</a></li>
+						<li><a href="call.html">联系我们</a></li>
+					</ul>
+				</div>
+				<div id="rig2">
+					<ul>
+						<li class="li-1"><a href="#">登录或注册</a></li>
+						<li class="li-2"><a href="shopping.html">购物篮</a></li>
+					</ul>
+				</div>	
+				<!-------------------cookie保存用户名-------------------------->
+				<div id="welcome">
+					<span id=""></span>欢迎您！
+					<input type="button" value="注销" onclick="dele()"/>						
+					
+				</div>
+				
+			</div>
+				
+			<!------------------------------头部上下------------------------------------->
+			<div id="nav">
+				<ul>
+					<li class="firstli" title="根据品牌选购"><a href="#">根据品牌选购</a>
+						<ul class="sec-ul">
+							<li><a href="#"><span>A</span>&nbsp;&nbsp;阿迪达斯</a></li>
+							<li><a href="#"><span>B</span>&nbsp;&nbsp;爱琪美</a></li>
+							<li><a href="#"><span>C</span>&nbsp;&nbsp;阿加迪尔阿甘油</a></li>
+							<li><a href="#"><span>D</span>&nbsp;&nbsp;艾卡尔</a></li>
+							<li><a href="#"><span>E</span>&nbsp;&nbsp;欧多利</a></li>
+							<li><a href="#"><span>F</span>&nbsp;&nbsp;艾米卡</a></li>
+							<li><a href="#"><span>G</span>&nbsp;&nbsp;女士香水</a></li>
+							<li><a href="#"><span>H</span>&nbsp;&nbsp;男士护肤</a></li>
+						</ul>
+					</li>			
+					<li title="女士护肤"><a href="Ladyskin.html">女士护肤</a></li>
+					<li title="美发护发"><a href="#">品牌彩妆</a></li>
+					<li title="美发护发"><a href="#">美发护发</a></li>
+					<li title="女士香水"><a href="#">女士香水</a></li>
+					<li title="男士护肤"><a href="#">男士护肤</a></li>
+					<li title="男士香水"><a href="#">男士香水</a></li>
+					<li title="暖室香颂"><a href="#">暖室香颂</a></li>
+					<li class="secondli" title="促销活动"><a href="Sales.html">促销活动</a></li>
+					<li title="新品上线"><a href="#">新品上线</a></li>       
+				</ul>
+			</div>
+		</div>
+		<!-------------------banner轮播图---------------------------->
+		<div id="lun">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide"><img src="img/01.jpg"/></div>
+					<div class="swiper-slide"><img src="img/02.jpg"/></div>
+					<div class="swiper-slide"><img src="img/03.jpg"/></div>
+					<div class="swiper-slide"><img src="img/04.jpg"/></div>
+					<div class="swiper-slide"><img src="img/05.jpg"/></div>
+					
+					<div class="swiper-slide"><img src="img/07.jpg"/></div>
+					<div class="swiper-slide"><img src="img/08.jpg"/></div>
+					<div class="swiper-slide"><img src="img/09.jpg"/></div>
+					<div class="swiper-slide"><img src="img/10.jpg"/></div>
+				</div>
+				<div class="swiper-pagination"></div>
+				<div class="swiper-button-prev"></div>
+				<div class="swiper-button-next"></div>
+			</div>
+		</div>
+		<!-----------------草莓今日秒杀------------->
+		<div id="main1Box">	
+				<div id="main1_01">
+					<hr id="hr_01"/>
+					<span class="s2">草&nbsp;莓&nbsp;网&nbsp;今&nbsp;日&nbsp;秒&nbsp;杀</span>
+					<hr id="hr_02"/>
+				</div>			
+			<div id="main1_02">
+					<span>仅剩:</span>
+					<span id="hoursSpan">0</span>h
+					<span id="minutesSpan">0</span>m
+					<span id="secondsSpan">0</span>s!
+			</div>
+		</div>
 	</body>
 </html>
+<script type="text/javascript" src="js/swiper-3.4.2.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>	
+
