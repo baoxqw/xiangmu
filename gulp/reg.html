@@ -27,7 +27,7 @@
 	 			font-size: 24px;
 	 			font-family: '宋体';
 	 		}
-	 		#main{
+	 		form{
 	 			margin-top: 20px;
 	 			color: #000;
 	 			font-size: 20px;
@@ -83,7 +83,7 @@
 	 			padding-left: 4px;
 	 			font-size: 14px;
 	 		}
-	 		footer div{
+	 		#regId{
 	 			margin-top: 10px;
 	 			background: #8f00ba;
 	 			text-align: center;
@@ -102,120 +102,90 @@
 				注册
 			</h3>
 		</header>
-		<div id="main">
+		<form method="post" action="php/regSave.php">		
 			<p>账户名：</p>
-			<input id="userId" type="text" /><span id="userMsg"></span><br/>
+			<input id="userId" type="text" name='userName'/><span id="userMsg"></span><br/>
 			<p>密码：</p>
-			<input id="password" type="password" /><span id="passMsg"></span><br/>
+			<input id="userPass" type="password" value="12345678912" /><span id="passMsg"></span><br/>
 			<p>电子邮箱：</p>
-			<input id="email" type="text" /><span id="emailMsg"></span><br/>
+			<input id="email" type="text" value="1234@qq.com"/><span id="emailMsg"></span><br/>
 			<p>手机号码：</p>
-			<input id="mobliePhone" type="text" /><span id="mobliePhoneMsg"></span><br/>
-			
-		</div>
-		<footer>
-			<!--<input type="button" name="reg" id="reg" value="注册" />-->
-			<div id="regId">注册</div>	
-			
-		</footer>
+			<input id="mobliePhone" type="text" value="15729540116"/><span id="mobliePhoneMsg"></span><br/>
+			<input type="submit" id="regId" value="注册" />
+		</form>
+		
 	</body>
 </html>
+<script src="js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
 var flag=0;
 window.onload = function(){
-	function $(str){
-		if(str.charAt(0)=="#"){
-			return document.getElementById(str.substring(1));
-		}else if(str.charAt(0)=="@"){
-			return document.getElementsByName(str.substring(1));
-		}
-	}
-	var inputs=document.getElementsByTagName("input").value;
-	
+
 //---------------账户名--------------------------	
 
-	$("#userId").onblur = function(){
-		//1、定义规则：数字字母下划线，长度6-12位，不能以数字开头。
-		var regObj = /^[a-zA-Z_]\w{5,11}$/;
-		if(regObj.test(this.value)){
-			$("#userMsg").innerHTML = "√";
-			flag=1;
-		}else{
-			$("#userMsg").innerHTML = "×";
-			flag=0;
-		}
-	}	
+	$("#userId").blur(function(){
+		$.ajax({
+			type:"get",
+			url:"php/checkuser.php",
+			async:true,
+			data:"userId="+this.value,
+			success:function(data){
+				if(data=="1"){
+					$("#userMsg").html("用户名已经存在，请重新选择！");
+				}else{
+					$("#userMsg").html("恭喜您，用户名可以使用！");
+				}
+			}
+		});
+		
+	})
+
 //----------------密码--------------------------------	
-$("#password").onblur = function(){
+$("#userPass").blur(function(){
 		//1、定义规则：
 		//身份证号码的规则 一共18位，第一位不能为0，最后一位可以是数字或者x，其余各位都是纯数字。
 		//var regObj = /^[1-9]\d{16}[0-9x]$/i;
 		var regObj = /^\w{10}/ig;
 		if(regObj.test(this.value)){
-			$("#passMsg").innerHTML = "√";
+			$("#passMsg").html("√");
 			flag=1;
 		}else{
-			$("#passMsg").innerHTML = "×";
-			flag=0;
+			$("#passMsg").html("×");
 		}
-	}
+	})
 //---------------电子邮箱--------------------------------
-	$("#email").onblur = function(){
+	$("#email").blur(function(){
 		//1、定义规则：
 		//邮箱的规则，要有@ 要有. @不能开头，.不能结尾，结尾是com或net或cn或com.cn
 		var regObj = /^\w+@+\w+\.(com|net|cn|com.cn)$/i;
 		if(regObj.test(this.value)){
-			$("#emailMsg").innerHTML = "√";
+			
+			$("#emailMsg").html("√");
 			flag=1;
 		}else{
-			$("#emailMsg").innerHTML = "×";
+			
+			$("#emailMsg").html("×");
 			flag=0;
 		}
-	}
+	})
 //-------------------手机号码----------------------------------
-	$("#mobliePhone").onblur = function(){
+	$("#mobliePhone").blur(function(){
 		//1、定义规则：
 		//手机号码的规则，1开头，第二位是（3,4,5,7,8,9），一共十一位纯数字
 		var regObj = /^1[345789]\d{9}$/i;
 		if(regObj.test(this.value)){
-			$("#mobliePhoneMsg").innerHTML = "√";
+			$("#mobliePhoneMsg").html("√");
+			
 			flag=1;
 		}else{
-			$("#mobliePhoneMsg").innerHTML = "×";
+			
+			$("#mobliePhoneMsg").html("×");
 			flag=0;
 		}
-	}		
-//	$("#regId").onclick=function(){
-//	if(flag){
-//		location.href="login.html";
-//		}
-	
-//	}
-	
-	$("#userId").onclick =function(){
-		//1、创建对象
-		
-		let xhr = new XMLHttpRequest();
-		let userName = $("#userId").value;
-		xhr.open("get","logincheck.php?userId="+userName,true);
-		
-		//3、回调函数
-		xhr.onreadystatechange = function(){
-			if(xhr.readyState==4 && xhr.status==200){
-				if(xhr.responseText=="1"){
-					//保存cookie？？
-					alert("亲，该用户名已经注册过了！");
-					
-				}else{
-					location.href="login.html";
-				}
-			}
-		}
-		//4、发送请求
-		xhr.send();		
-	};
-	
+	})	
 }
+
+
 
 
 </script>
