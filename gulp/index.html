@@ -33,14 +33,15 @@
 				</div>
 				<div id="rig2">
 					<ul>
-						<li class="li-1"><a href="../yidongAPP/login.html">登录或注册</a></li>
+						<li class="li-1"><a href="login.html">登录或注册</a></li>
 						<li class="li-2"><a href="shopping.html">购物篮</a></li>
 					</ul>
 				</div>	
 				<!-------------------cookie保存用户名-------------------------->
 				<div id="welcome">
-					<span id=""></span>欢迎您！
-					<input type="button" value="注销" onclick="dele()"/>						
+					<!--<div id="userSpan">哈哈</div>欢迎您-->
+					<span id="userSpan">哈哈</span>欢迎您！
+					<input type="button" value="注销" id="btnLogout"/>						
 					
 				</div>
 				
@@ -578,9 +579,46 @@
 			
 	</body>
 </html>
-<script type="text/javascript" src="js/jquery-1.8.3.min.js">
-	
-</script>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="js/swiper-3.4.2.min.js"></script>
 <script type="text/javascript" src="js/index.js"></script>	
+<script type="text/javascript">
+	function showWelcome(){
+		
+	//1、从cookie中获取userId
+	//1)、把document.cookie用split分割成数组;
+	var arr = document.cookie.split("; ");
+	//2)、循环数组，查找userId
+	var userId = "";
+	for(var i=0;i<arr.length;i++){
+		if(arr[i].indexOf("userId=")==0){
+			userId = arr[i].substring("userId=".length);
+			break;
+		}
+	}
+	//2、如果有userId，显示welcomeDiv
+	if(userId.length>0){
+		$("#userSpan").html("");
+		$("#userSpan").html(userId);
+	}else{
+	//3、如果没有userId，显示loginDiv	
+		$("#userSpan").html("么么哒");
+	}
+}
 
+$("#btnLogout").onclick = function(){
+	//1、删除cookie(保存cookie时，把失效日期写成过去的某个日期)
+	var d = new Date();
+	d.setDate(d.getDate()-1);
+	document.cookie = "userId=hi;expires="+d.toGMTString();
+	
+	//2、让登录div显示
+	//3、让欢迎div隐藏
+//	showWelcome();
+	
+}
+
+window.onload = function(){
+	showWelcome();
+}
+</script>
